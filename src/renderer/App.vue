@@ -1,12 +1,16 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <top-button />
+    <router-view />
   </div>
 </template>
 
 <script>
+import TopButton from '@/views/layout/components/TopButton'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: { TopButton }
 }
 </script>
 <style lang="scss">
