@@ -17,17 +17,17 @@ export default {
 </script>
 
 <style>
-  html,body{
-    padding: 0px;
-    margin: 0px;
-    border: 0px;
-    width:100%;
-    height:100%
-  }
-  #mytitle {
-    position: absolute;
-    width: 100%;
-    height: 52px;
-    -webkit-app-region: drag;
-  }
+html,body{
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  width:100%;
+  height:100%
+}
+#mytitle {
+  position: absolute;
+  width: 100%;
+  height: 52px;
+  -webkit-app-region: drag;
+}
 </style>
