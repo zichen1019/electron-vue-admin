@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain, Menu, Tray } from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -20,7 +20,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     height: 563,
     useContentSize: true,
-    width: 1000
+    width: 1000,
+    frame: false // 外边框
   })
 
   mainWindow.loadURL(winURL)
@@ -30,7 +31,33 @@ function createWindow() {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', async() => {
+  // 设置托盘
+  const tray = new Tray('build/icons/icon.ico')
+  // 设置托盘菜单
+  const trayContextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Open',
+      click: () => {
+        mainWindow.show()
+      }
+    }, {
+      label: 'Close',
+      click: () => {
+        app.quit()
+      }
+    }
+  ])
+  tray.setToolTip('Electron Vue')
+  tray.on('click', () => {
+    mainWindow.show()
+  })
+  tray.on('right-click', () => {
+    tray.popUpContextMenu(trayContextMenu)
+  })
+  // 创建渲染窗口
+  createWindow()
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -63,3 +90,19 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
 })
  */
+
+// 登录窗口最小化
+ipcMain.on('min', function() {
+  mainWindow.minimize()
+})
+// 登录窗口最大化
+ipcMain.on('max', function() {
+  if (mainWindow.isMaximized()) {
+    mainWindow.restore()
+  } else {
+    mainWindow.maximize()
+  }
+})
+ipcMain.on('close', function() {
+  mainWindow.close()
+})
