@@ -47,7 +47,7 @@ export default {
     height: 15px;
     -webkit-app-region: no-drag;
     border-radius: 50%;
-    z-index: 10;
+    z-index: 10000;
   }
   .titlebtn:hover{
     border: 1px solid rgba(248, 242, 242, 0.6);

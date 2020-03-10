@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <top-button />
+    <top-layout :title.sync="$store.getters.title" />
     <router-view />
   </div>
 </template>
 
 <script>
-import TopButton from '@/views/layout/components/TopButton'
+import TopLayout from '@/views/layout/TopLayout'
 
 export default {
   name: 'App',
-  components: { TopButton }
+  components: { TopLayout }
 }
 </script>
 <style lang="scss">
