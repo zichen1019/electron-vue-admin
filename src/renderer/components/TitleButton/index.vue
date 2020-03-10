@@ -10,15 +10,15 @@
 const style = {
   min: {
     backgroundColor: 'green',
-    right: '65px'
+    left: '65px'
   },
   max: {
     backgroundColor: 'yellow',
-    right: '40px'
+    left: '40px'
   },
   close: {
     backgroundColor: 'red',
-    right: '15px'
+    left: '15px'
   }
 }
 
