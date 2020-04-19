@@ -28,6 +28,7 @@ export default {
       return rect.width - RATIO < WIDTH
     },
     resizeHandler() {
+      const _this = this
       if (!document.hidden) {
         const isMobile = this.isMobile()
         store.dispatch('ToggleDevice', isMobile ? 'mobile' : 'desktop')
@@ -35,6 +36,7 @@ export default {
         if (isMobile) {
           store.dispatch('CloseSideBar', { withoutAnimation: true })
         }
+        _this.$store.getters.vue.$emit('reload')
       }
     }
   }

@@ -10,12 +10,16 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+import utils from './utils'
+
 import '@/icons' // icon
 import '@/permission' // permission control
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 
 Vue.use(ElementUI, { locale })
+
+Vue.prototype.$utils = utils
 
 Vue.config.productionTip = false
 

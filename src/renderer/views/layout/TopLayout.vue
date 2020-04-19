@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div id="mytitle">
-      {{ title }}
+    <div class="title">
+      日程
     </div>
     <TitleButton type="min" />
     <TitleButton type="max" />
@@ -10,16 +10,16 @@
 </template>
 
 <script>
+import Mallki from '@/components/TextHoverEffect/Mallki'
 import TitleButton from '@/components/TitleButton'
 
 export default {
   name: 'TopButton',
-  components: { TitleButton },
-  props: ['title']
+  components: { TitleButton, Mallki }
 }
 </script>
 
-<style>
+<style scoped>
   html,body{
     padding: 0px;
     margin: 0px;
@@ -27,11 +27,15 @@ export default {
     width:100%;
     height:100%;
   }
-  #mytitle {
-    top: 2vh;
+  .title {
+    padding: 5px 0;
+    left: 30%;
+    padding-left: 20%;
     position: relative;
     z-index: 10000;
-    font-size: 14px;
-    text-align: center;
+    font-size: 20px;
+    -webkit-app-region: drag;
+    width:70%;
+    height:100%;
   }
 </style>

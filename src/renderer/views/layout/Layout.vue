@@ -5,11 +5,13 @@
       <navbar></navbar>
       <app-main></app-main>
     </div>
+    <web-socket />
+    <cron />
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from './components'
+import { Navbar, Sidebar, AppMain, WebSocket, Cron } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
@@ -17,7 +19,9 @@ export default {
   components: {
     Navbar,
     Sidebar,
-    AppMain
+    AppMain,
+    WebSocket,
+    Cron
   },
   mixins: [ResizeMixin],
   computed: {

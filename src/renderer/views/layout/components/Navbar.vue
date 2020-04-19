@@ -1,7 +1,8 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
-    <breadcrumb></breadcrumb>
+    <el-page-header class="my-page-header" @back="goBack" style="display: inline;" />
+    <breadcrumb class="my-breadcrumb" />
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
         <img class="user-avatar" :src="avatar+'?imageView2/1/w/80/h/80'">
@@ -45,6 +46,9 @@ export default {
       this.$store.dispatch('LogOut').then(() => {
         location.reload() // 为了重新实例化vue-router对象 避免bug
       })
+    },
+    goBack() {
+      this.$router.go(-1)
     }
   }
 }
@@ -60,6 +64,14 @@ export default {
     height: 50px;
     float: left;
     padding: 0 10px;
+  }
+  .my-page-header {
+    line-height: 50px;
+    float: left;
+    margin-left: 10px;
+  }
+  .my-breadcrumb {
+    float: left;
   }
   .screenfull {
     position: absolute;

@@ -37,7 +37,7 @@ export const constantRouterMap = [
     }]
   },
 
-  {
+  /* {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
@@ -70,6 +70,39 @@ export const constantRouterMap = [
         meta: { title: 'Form', icon: 'form' }
       }
     ]
+  },*/
+
+  {
+    path: '/todo',
+    component: Layout,
+    redirect: '/todo/list',
+    meta: { title: '待办', icon: 'needTo' },
+    children: [
+      {
+        path: 'list',
+        name: 'TodoMatterList',
+        component: () => import('@/views/todo/list'),
+        meta: { title: '运行事项', icon: 'notReminded' }
+      },
+      {
+        path: 'create/:id',
+        name: 'TodoMatter',
+        hidden: true,
+        component: () => import('@/views/todo/create'),
+        meta: { title: '创建事项', icon: 'create' }
+      },
+      {
+        path: 'hasNoneList',
+        name: 'TodoMatterHasNoneList',
+        component: () => import('@/views/todo/hasNoneList'),
+        meta: { title: '已办事项', icon: 'reminded' }
+      }
+    ]
+  },
+
+  {
+    path: '/notify/:id',
+    component: () => import('@/views/todo/notify')
   },
 
   { path: '*', redirect: '/404', hidden: true }

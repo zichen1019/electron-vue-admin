@@ -55,8 +55,3 @@ export default {
   }
 }
 </script>
-<style>
-  .menu-wrapper {
-    margin-top: 2.5vh;
-  }
-</style>

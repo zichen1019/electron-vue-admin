@@ -37,13 +37,13 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+// import { getList } from '@/api/table'
 
 export default {
   data() {
     return {
-      list: null,
-      listLoading: true
+      list: [{ id: 1, title: '123' }],
+      listLoading: false
     }
   },
   filters: {
@@ -61,11 +61,11 @@ export default {
   },
   methods: {
     fetchData() {
-      this.listLoading = true
-      getList(this.listQuery).then(response => {
-        this.list = response.data.items
-        this.listLoading = false
-      })
+      // this.listLoading = true
+      // getList(this.listQuery).then(response => {
+      //   this.list = response.data.items
+      //   this.listLoading = false
+      // })
     }
   }
 }

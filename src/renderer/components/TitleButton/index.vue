@@ -33,19 +33,18 @@ export default {
   methods: {
     send: function() {
       const { ipcRenderer } = require('electron')
-      ipcRenderer.send(this.type)
+      ipcRenderer.send()
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
   .titlebtn {
     position: absolute;
     top: 10px;
     width: 15px;
     height: 15px;
-    -webkit-app-region: no-drag;
     border-radius: 50%;
     z-index: 10000;
   }

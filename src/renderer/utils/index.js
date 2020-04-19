@@ -56,3 +56,28 @@ export function formatTime(time, option) {
     return d.getMonth() + 1 + '月' + d.getDate() + '日' + d.getHours() + '时' + d.getMinutes() + '分'
   }
 }
+
+/**
+ * 深拷贝
+ * @param o
+ * @returns {{}|[]|*}
+ */
+export function deepCopy(o) {
+  if (o instanceof Array) {
+    var n = []
+    for (var i = 0; i < o.length; ++i) {
+      n[i] = this.deepCopy(o[i])
+    }
+    return n
+  } else if (o instanceof Object) {
+    var nn = {}
+    for (var j in o) {
+      nn[j] = this.deepCopy(o[j])
+    }
+    return nn
+  } else {
+    return o
+  }
+}
+
+export default { deepCopy, parseTime, formatTime }

@@ -18,7 +18,9 @@ const user = {
     setting: {
       articlePlatform: []
     },
-    ip: ''
+    ip: '',
+    // 定时器队列
+    queueCron: []
   },
 
   mutations: {
@@ -32,44 +34,16 @@ const user = {
       state.addres = user.addres
       state.mobile = user.mobile
       state.roles = user.roles
-    },
-    NULL_USER: (state) => {
-      state.userId = ''
-      state.name = ''
-      state.avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
-      state.introduction = ''
-      state.birday = ''
-      state.gender = ''
-      state.addres = ''
-      state.mobile = ''
-      state.roles = []
+      state.queueCron = []
     },
     SET_TOKEN: (state, token) => {
       state.token = token
     },
-    SET_CODE: (state, code) => {
-      state.code = code
-    },
-    SET_INTRODUCTION: (state, introduction) => {
-      state.introduction = introduction
-    },
-    SET_SETTING: (state, setting) => {
-      state.setting = setting
-    },
-    SET_STATUS: (state, status) => {
-      state.status = status
-    },
-    SET_NAME: (state, name) => {
-      state.name = name
-    },
-    SET_AVATAR: (state, avatar) => {
-      state.avatar = avatar
-    },
-    SET_IP: (state, ip) => {
-      state.ip = ip
-    },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_QUEUECRON: (state, queueCron) => {
+      state.queueCron = queueCron
     }
   },
 
@@ -94,12 +68,12 @@ const user = {
         getInfo().then(response => {
           const { user } = response
           if (!user) {
-            reject('Verification failed, please Login again.')
+            reject('获取用户信息失败！')
           }
           if (user.roles && user.roles.length > 0) { // 验证返回的roles是否是一个非空数组
             commit('SET_ROLES', user.roles)
           } else {
-            reject('getInfo: roles must be a non-null array !')
+            reject('获取用户权限失败！')
           }
           commit('SET_USER', user)
           resolve(user)
@@ -115,6 +89,7 @@ const user = {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
           commit('SET_ROLES', [])
+          commit('SET_QUEUECRON', [])
           removeToken()
           resolve()
         }).catch(error => {
@@ -128,6 +103,7 @@ const user = {
       return new Promise(resolve => {
         removeToken()
         commit('SET_TOKEN', '')
+        commit('SET_QUEUECRON', [])
         resolve()
       })
     }

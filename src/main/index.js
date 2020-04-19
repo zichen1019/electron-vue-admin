@@ -18,10 +18,13 @@ function createWindow() {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 563,
+    height: 1100,
     useContentSize: true,
-    width: 1000,
-    frame: false // 外边框
+    width: 2300,
+    // frame: false, // 外边框
+    webPreferences: {
+      nodeIntegration: true
+    }
   })
 
   mainWindow.loadURL(winURL)
@@ -30,6 +33,54 @@ function createWindow() {
     mainWindow = null
   })
 }
+
+// 定义calendar窗体
+let newWin
+
+/**
+ * 创建calendar窗口方法
+ * @param arg { url: '', width: '', height: '' }
+ */
+function openNewWindow(arg) {
+  newWin = new BrowserWindow({
+    width: arg.width,
+    height: arg.height,
+    parent: mainWindow, // win是主窗口
+    alwaysOnTop: true,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  })
+  newWin.loadURL(winURL + '#' + arg.url)
+  newWin.on('closed', () => { newWin = null })
+}
+ipcMain.on('openNewWindow', (event, arg) => {
+  openNewWindow(arg)
+})
+
+let newModal
+function openNewModal(arg) {
+  newModal = new BrowserWindow({
+    width: arg.width,
+    height: arg.height,
+    modal: true,
+    alwaysOnTop: true,
+    // 是否开启外边框
+    frame: false,
+    // 是否透明背景
+    transparent: true
+  })
+  newModal.loadURL(winURL + '#' + arg.url)
+  newModal.on('closedModal', () => { newModal = null })
+  newModal.show()
+}
+ipcMain.on('openNewModal', (event, arg) => {
+  openNewModal(arg)
+})
+
+ipcMain.on('closedModal', () => {
+  newModal.close()
+})
 
 app.on('ready', async() => {
   // 设置托盘
