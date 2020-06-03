@@ -30,10 +30,10 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/dashboard',
     name: 'Dashboard',
-    hidden: true,
     children: [{
       path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
+      component: () => import('@/views/dashboard/index'),
+      meta: { title: '首页', icon: 'example' }
     }]
   },
 
@@ -86,7 +86,7 @@ export const constantRouterMap = [
       },
       {
         path: 'create/:id',
-        name: 'TodoMatter',
+        name: 'TodoMatterCreate',
         hidden: true,
         component: () => import('@/views/todo/create'),
         meta: { title: '创建事项', icon: 'create' }
@@ -96,6 +96,34 @@ export const constantRouterMap = [
         name: 'TodoMatterHasNoneList',
         component: () => import('@/views/todo/hasNoneList'),
         meta: { title: '已办事项', icon: 'reminded' }
+      }
+    ]
+  },
+
+  {
+    path: '/url',
+    component: Layout,
+    redirect: '/url/list',
+    meta: { title: '网址库', icon: 'needTo' },
+    children: [
+      {
+        path: 'list',
+        name: 'UrlList',
+        component: () => import('@/views/url/list'),
+        meta: { title: '网址', icon: 'notReminded' }
+      },
+      {
+        path: 'classify',
+        name: 'Classify',
+        component: () => import('@/views/url/classify/index'),
+        meta: { title: '类别管理', icon: 'notReminded' }
+      },
+      {
+        path: 'create/:id',
+        name: 'UrlCreate',
+        hidden: true,
+        component: () => import('@/views/url/create'),
+        meta: { title: '添加网址', icon: 'create' }
       }
     ]
   },
